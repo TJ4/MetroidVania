@@ -25,16 +25,19 @@ func _physics_process(delta):
 			velocity.y += JUMP_POWER;
 			on_ground = false;
 			jump_count += 1;
+			print(jump_count);
 		elif !on_ground and jump_count < max_jump_count:
 			velocity.y = JUMP_POWER;
 			jump_count += 1;
+			print(jump_count);
 	
 	velocity.y += GRAVITY;
+		
+	velocity = move_and_slide(velocity, FLOOR);
 	
 	if is_on_floor():
+		print("got to floor");
 		on_ground = true;
 		jump_count = 0;
 	else:
 		on_ground = false;
-		
-	velocity = move_and_slide(velocity, FLOOR);
